@@ -32,10 +32,7 @@ const percentageGradesIntoLetters = ({ name, disciplines }) => ({
       .filter(approvedStudents)
       .map(updateApprovalData);
   }
-  
-  /* Exemplo de execução */
-  // ...
-  
+    
   /*
     Não se esqueça que é necessário exportar ao final as
     funções para que você possa testa-las de forma unitária
