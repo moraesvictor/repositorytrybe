@@ -17,8 +17,23 @@ const validatingCep = (CEP) => {
   return validation;
 }
 
+const brasilApiService = async(cep) => {
+  const URL = `https://brasilapi.com.br/api/cep/v1/${cep}`;
 
-const ConsultingCep = async(userName) => {
+  const request = await axios.get(URL);
+
+  console.log(request.data)
+}
+
+const viaCepService = async(cep) => {
+  const URL = `https://viacep.com.br/ws/${cep}/json`;
+
+  const request = await axios.get(URL);
+
+  console.log(request.data)
+}
+
+const ConsultingCep = async(userName, service) => {
     const { cep } = USERS_CEP[`${userName}`];
 
     const validation = validatingCep(cep);
@@ -27,15 +42,10 @@ const ConsultingCep = async(userName) => {
 
     if(validation) {
       verifiedCep = cep.replace(/[^\d]+/g, "");
-
-      const URL = `https://brasilapi.com.br/api/cep/v1/${cep}`;
-
-      const request = await axios.get(URL);
-
-      console.log(request.data)
+      service(cep);
     }
 
 }
 
-ConsultingCep("victorMoraes")
-ConsultingCep("iveteMoraes")
+ConsultingCep("victorMoraes", brasilApiService)
+ConsultingCep("iveteMoraes", brasilApiService)
